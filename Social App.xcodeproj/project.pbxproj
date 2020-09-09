@@ -8,10 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		9E3C22218506069E88DB8EB5 /* Pods_Social_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7013933F1F6CE40F37697E63 /* Pods_Social_App.framework */; };
+		D92258C52508A51A00EA586E /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92258C42508A51A00EA586E /* LoginController.swift */; };
 		D93E3AA42505289000918DB7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93E3AA32505289000918DB7 /* AppDelegate.swift */; };
 		D93E3AA62505289000918DB7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93E3AA52505289000918DB7 /* SceneDelegate.swift */; };
-		D93E3AA82505289000918DB7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93E3AA72505289000918DB7 /* ViewController.swift */; };
-		D93E3AAB2505289000918DB7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D93E3AA92505289000918DB7 /* Main.storyboard */; };
 		D93E3AAD2505289200918DB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D93E3AAC2505289200918DB7 /* Assets.xcassets */; };
 		D93E3AB02505289200918DB7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D93E3AAE2505289200918DB7 /* LaunchScreen.storyboard */; };
 		D93E3ABB2505320B00918DB7 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93E3ABA2505320B00918DB7 /* HomeController.swift */; };
@@ -21,11 +20,10 @@
 		4D579B31CEEAC49D998E969A /* Pods-Social App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Social App.release.xcconfig"; path = "Target Support Files/Pods-Social App/Pods-Social App.release.xcconfig"; sourceTree = "<group>"; };
 		7013933F1F6CE40F37697E63 /* Pods_Social_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Social_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		85A2CA29D6074B6B6CE1C87E /* Pods-Social App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Social App.debug.xcconfig"; path = "Target Support Files/Pods-Social App/Pods-Social App.debug.xcconfig"; sourceTree = "<group>"; };
+		D92258C42508A51A00EA586E /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		D93E3AA02505289000918DB7 /* Social App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Social App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D93E3AA32505289000918DB7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D93E3AA52505289000918DB7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D93E3AA72505289000918DB7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		D93E3AAA2505289000918DB7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D93E3AAC2505289200918DB7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D93E3AAF2505289200918DB7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D93E3AB12505289200918DB7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -85,8 +83,6 @@
 				D93E3AB9250531F800918DB7 /* Controllers */,
 				D93E3AA32505289000918DB7 /* AppDelegate.swift */,
 				D93E3AA52505289000918DB7 /* SceneDelegate.swift */,
-				D93E3AA72505289000918DB7 /* ViewController.swift */,
-				D93E3AA92505289000918DB7 /* Main.storyboard */,
 				D93E3AAC2505289200918DB7 /* Assets.xcassets */,
 				D93E3AAE2505289200918DB7 /* LaunchScreen.storyboard */,
 				D93E3AB12505289200918DB7 /* Info.plist */,
@@ -98,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				D93E3ABA2505320B00918DB7 /* HomeController.swift */,
+				D92258C42508A51A00EA586E /* LoginController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -164,7 +161,6 @@
 			files = (
 				D93E3AB02505289200918DB7 /* LaunchScreen.storyboard in Resources */,
 				D93E3AAD2505289200918DB7 /* Assets.xcassets in Resources */,
-				D93E3AAB2505289000918DB7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,7 +214,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D93E3ABB2505320B00918DB7 /* HomeController.swift in Sources */,
-				D93E3AA82505289000918DB7 /* ViewController.swift in Sources */,
+				D92258C52508A51A00EA586E /* LoginController.swift in Sources */,
 				D93E3AA42505289000918DB7 /* AppDelegate.swift in Sources */,
 				D93E3AA62505289000918DB7 /* SceneDelegate.swift in Sources */,
 			);
@@ -227,14 +223,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		D93E3AA92505289000918DB7 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D93E3AAA2505289000918DB7 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		D93E3AAE2505289200918DB7 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -368,6 +356,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F8Q38FUM5R;
 				INFOPLIST_FILE = "Social App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -387,6 +376,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F8Q38FUM5R;
 				INFOPLIST_FILE = "Social App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
