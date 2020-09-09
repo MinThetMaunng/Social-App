@@ -32,6 +32,12 @@ class LoginController: LBTAFormController {
         guard let password = passwordTextField.text else { return }
         
         errorLabel.isHidden = true
+        let url = "https://socialappnode.herokuapp.com/users/login/"
+        let params = ["email": email, "password": password]
+        AF.request(url, method: .post, parameters: params, encoding: URLEncoding()).responseJSON { (resp) in
+            print("Got response")
+            print(resp.result)
+        }
     }
     
     @objc private func goToRegister() {

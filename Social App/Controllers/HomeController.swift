@@ -25,10 +25,10 @@ class HomeController: UITableViewController {
     }
     
     @objc private func fetchPosts() {
-        let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjU3OTUyNmUwODIxYTIxZmIxMDYxOWUiLCJlbWFpbCI6ImRhbmllbEBnbWFpbC5jb20iLCJpYXQiOjE1OTk2MzA0MzEsImV4cCI6MTU5OTgwMzIzMX0.U_TIwUTHX4Zcgx0ym8SEdk5LMLvas2V-qw3A8FV-xXM"
+        
         guard let url = URL(string: "https://socialappnode.herokuapp.com/posts/") else { return }
         var request = URLRequest(url: url)
-        request.setValue("\(token)", forHTTPHeaderField: "Authorization")
+        request.setValue("\(AuthService.shared.jwtToken)", forHTTPHeaderField: "Authorization")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         URLSession.shared.dataTask(with: request) { (data, resp, err) in
             

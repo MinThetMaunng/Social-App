@@ -1,6 +1,7 @@
 PODS:
   - Alamofire (5.0.4)
   - JGProgressHUD (2.1)
+  - KeychainSwift (19.0.0)
   - LBTATools (1.0.12)
   - SDWebImage (5.6.1):
     - SDWebImage/Core (= 5.6.1)
@@ -9,6 +10,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - JGProgressHUD
+  - KeychainSwift
   - LBTATools
   - SDWebImage
 
@@ -16,15 +18,17 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - JGProgressHUD
+    - KeychainSwift
     - LBTATools
     - SDWebImage
 
 SPEC CHECKSUMS:
   Alamofire: 0fe5fd24b4298dc377a6550da7d5f1b30e286fcb
   JGProgressHUD: aa403e9a5b45cae98903c4600cccdd98c0c3ec90
+  KeychainSwift: a06190cf933ad46b1e0abc3d77d29c06331715c7
   LBTATools: 389a901a01b9a56bea5682c40cd6e23530f40015
   SDWebImage: 7edb9c3ea661e77a66661f7f044de8c1b55d1120
 
-PODFILE CHECKSUM: 1e6b644aee0434292f391bb7bcebb98f3321f0e4
+PODFILE CHECKSUM: 1280668ea9f4299f69e1e7fdd797d0d70a554e31
 
 COCOAPODS: 1.9.1
