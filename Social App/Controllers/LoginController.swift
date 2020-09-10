@@ -19,7 +19,7 @@ class LoginController: LBTAFormController {
     let emailTextField = IndentedTextField(placeholder: "Email", padding: 24, cornerRadius: 25, keyboardType: .emailAddress)
     let passwordTextField = IndentedTextField(placeholder: "Password", padding: 24, cornerRadius: 25)
     lazy var loginButton = UIButton(title: "Login", titleColor: .white, backgroundColor: .black, target: self, action: #selector(handleLogin))
-    let errorLabel = UILabel(text: "Your login crenditals were incorrect, please try again.", font: .boldSystemFont(ofSize: 18), textColor: .red, textAlignment: .center, numberOfLines: 0)
+    let errorLabel = UILabel(text: "Your login crenditals are not correct. Please try again.", font: .boldSystemFont(ofSize: 18), textColor: .red, textAlignment: .center, numberOfLines: 0)
     lazy var goToRegisterButton = UIButton(title: "Don't have account? Go to register", titleColor: .black, font: .systemFont(ofSize: 16), target: self, action: #selector(goToRegister))
     
     
@@ -32,11 +32,31 @@ class LoginController: LBTAFormController {
         guard let password = passwordTextField.text else { return }
         
         errorLabel.isHidden = true
-        let url = "https://socialappnode.herokuapp.com/users/login/"
+        
+        let url = "\(baseUrl)/users/login/"
         let params = ["email": email, "password": password]
-        AF.request(url, method: .post, parameters: params, encoding: URLEncoding()).responseJSON { (resp) in
-            print("Got response")
-            print(resp.result)
+        
+        AF.request(url, method: .post, parameters: params, encoding: URLEncoding())
+            .validate(statusCode: 200..<300)
+            .responseData { (resp) in
+            hud.dismiss()
+            
+                if let _ = resp.error {
+                    self.errorLabel.isHidden = false
+                    return
+                }
+                
+                guard let data = resp.data else { return }
+                do {
+                    let loginResp = try JSONDecoder().decode(LoginResponse.self, from: data)
+                    guard let token = loginResp.data?.token else {
+                        fatalError("Cannot save token into keychain!")
+                    }
+                    AuthService.shared.jwtToken = token
+                } catch(let err) {
+                    fatalError("Error in log in response decoding : \(err.localizedDescription)")
+                }
+                self.dismiss(animated: true)
         }
     }
     

@@ -8,6 +8,7 @@
 
 import UIKit
 import LBTATools
+import Alamofire
 
 class HomeController: UITableViewController {
 
@@ -26,26 +27,26 @@ class HomeController: UITableViewController {
     
     @objc private func fetchPosts() {
         
-        guard let url = URL(string: "https://socialappnode.herokuapp.com/posts/") else { return }
-        var request = URLRequest(url: url)
-        request.setValue("\(AuthService.shared.jwtToken)", forHTTPHeaderField: "Authorization")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        URLSession.shared.dataTask(with: request) { (data, resp, err) in
-            
-            DispatchQueue.main.async {
-                if let err = err {
-                    print("Error in getting posts : \(err)")
-                    return
-                } else if let resp = resp as? HTTPURLResponse, resp.statusCode != 200 {
-                    print("Failed to fetch with status code \(resp.statusCode)")
-                } else {
-                    print("Sucessfully fetched posts")
-                    print(data)
+        guard let url = URL(string: "\(baseUrl)/posts/") else { return }
+        let headers = HTTPHeaders(arrayLiteral: HTTPHeader(name: "Content-Type", value: "application/json"), HTTPHeader(name: "Authorization", value: "\(AuthService.shared.jwtToken)"))
+        
+        AF.request(url, headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseData { (resp) in
+                if let err = resp.error {
+                    print("Failed to fetch posts : \(err)")
                 }
                 
-            }
-            
-        }.resume()
+                guard let data = resp.data else { return }
+                do {
+                    let fetchedPostsResponse = try JSONDecoder().decode(FetchedPostsResponse.self, from: data)
+                    let posts = fetchedPostsResponse.data
+                    print(posts?.first!.text)
+                } catch (let err) {
+                    fatalError("Error in decoding fetch posts : \(err.localizedDescription)")
+                }
+        }
+
     }
     
 }
