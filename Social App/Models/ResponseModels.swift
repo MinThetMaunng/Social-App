@@ -8,6 +8,13 @@
 
 import Foundation
 
+
+struct SignUpResponse: Codable {
+    var data: User?
+    var status: Int
+    var message: String?
+}
+
 struct LoginResponse: Codable {
     var data: User?
     var status: Int
@@ -21,3 +28,4 @@ struct FetchedPostsResponse: Codable {
     var message: String?
     var total: Int
 }
+

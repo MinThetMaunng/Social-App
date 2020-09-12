@@ -27,7 +27,50 @@ class RegisterController: LBTAFormController {
     lazy var goToLoginButton = UIButton(title: "Go back to login.", titleColor: .black, font: .systemFont(ofSize: 16), target: self, action: #selector(goToLogin))
     
     @objc private func handleSignup() {
+        let hud = JGProgressHUD(style: .dark)
+        hud.textLabel.text = "Registering"
+        hud.show(in: view)
         
+        guard let firstName = firstNameTextField.text,
+            firstName.count > 0,
+            let middleName = middleNameTextField.text,
+            let lastName = lastNameTextField.text,
+            let email = emailTextField.text,
+            email.count > 0,
+            let password = passwordTextField.text,
+            password.count > 0
+            else { return }
+        
+        let url = "\(baseUrl)/users/signup/"
+        let params = [
+            "firstName": firstName,
+            "middleName": middleName,
+            "lastName": lastName,
+            "email": email,
+            "password": password
+        ]
+        
+        AF.request(url, method: .post, parameters: params)
+            .validate(statusCode: 200..<300)
+            .responseData { (resp) in
+                hud.dismiss()
+
+                if let err = resp.error {
+                    print("Error in sign up : \(err.localizedDescription)")
+                    self.errorLabel.isHidden = false
+                    return
+                }
+                guard let data = resp.data else { return }
+                do {
+                    let signupResponse = try JSONDecoder().decode(SignUpResponse.self, from: data)
+                    if let token = signupResponse.data?.token {
+                        signupResponse.data?.logIn()
+                    }
+                } catch (let err) {
+                    fatalError("Error in decoding Signup response : \(err.localizedDescription)")
+                }
+
+        }
     }
     
     @objc private func goToLogin() {
@@ -44,7 +87,11 @@ class RegisterController: LBTAFormController {
         
         errorLabel.isHidden = true
         emailTextField.autocapitalizationType = .none
-        [firstNameTextField, middleNameTextField, lastNameTextField, emailTextField, passwordTextField].forEach{$0.backgroundColor = .white}
+        [firstNameTextField, middleNameTextField, lastNameTextField, emailTextField, passwordTextField].forEach{
+            $0.autocorrectionType = .no
+            $0.backgroundColor = .white
+            
+        }
         signupButton.layer.cornerRadius = 25
         
         view.backgroundColor = .init(white: 0.92, alpha: 1)

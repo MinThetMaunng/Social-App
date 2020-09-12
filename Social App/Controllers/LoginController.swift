@@ -52,7 +52,7 @@ class LoginController: LBTAFormController {
                     guard let token = loginResp.data?.token else {
                         fatalError("Cannot save token into keychain!")
                     }
-                    AuthService.shared.jwtToken = token
+                    loginResp.data?.logIn()
                 } catch(let err) {
                     fatalError("Error in log in response decoding : \(err.localizedDescription)")
                 }

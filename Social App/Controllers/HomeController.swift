@@ -57,11 +57,13 @@ class HomeController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
         let post = posts[indexPath.row]
-        cell.textLabel?.text = post.user?.email
+        
+        cell.textLabel?.text = post.user.fullName
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        cell.detailTextLabel?.text = posts[indexPath.row].text
+        cell.detailTextLabel?.text = post.text
         cell.detailTextLabel?.numberOfLines = 0
         return cell
     }

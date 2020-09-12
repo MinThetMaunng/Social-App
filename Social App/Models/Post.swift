@@ -11,7 +11,7 @@ import Foundation
 struct Post: Codable {
     var _id: String
     var text: String?
-    var user: User?
+    var user: User
     var createdAt: String?
     var updatedAt: String?
     var __v: Int?
