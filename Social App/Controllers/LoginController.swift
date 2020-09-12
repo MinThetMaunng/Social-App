@@ -49,8 +49,8 @@ class LoginController: LBTAFormController {
                 guard let data = resp.data else { return }
                 do {
                     let loginResp = try JSONDecoder().decode(LoginResponse.self, from: data)
-                    guard let token = loginResp.data?.token else {
-                        fatalError("Cannot save token into keychain!")
+                    guard let _ = loginResp.data?.token else {
+                        fatalError("No token received from server!")
                     }
                     loginResp.data?.logIn()
                 } catch(let err) {

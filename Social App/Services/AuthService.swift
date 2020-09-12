@@ -53,7 +53,7 @@ class AuthService : NSObject {
     
     var isLoggedIn: Bool {
         get {
-            return defaults.bool(forKey: Keys.isLoggedIn.rawValue) || false
+            return defaults.bool(forKey: Keys.isLoggedIn.rawValue)
         }
         set {
             defaults.set(newValue, forKey: Keys.isLoggedIn.rawValue)

@@ -29,8 +29,9 @@ class HomeController: UITableViewController {
     
     @objc private func fetchPosts() {
         
+        guard let token = AuthService.shared.jwtToken else { return }
         guard let url = URL(string: "\(baseUrl)/posts/") else { return }
-        let headers = HTTPHeaders(arrayLiteral: HTTPHeader(name: "Content-Type", value: "application/json"), HTTPHeader(name: "Authorization", value: "\(AuthService.shared.jwtToken)"))
+        let headers = HTTPHeaders(arrayLiteral: HTTPHeader(name: "Content-Type", value: "application/json"), HTTPHeader(name: "Authorization", value: token))
         
         AF.request(url, headers: headers)
             .validate(statusCode: 200..<300)

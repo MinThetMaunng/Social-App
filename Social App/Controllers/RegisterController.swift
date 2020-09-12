@@ -60,12 +60,14 @@ class RegisterController: LBTAFormController {
                     self.errorLabel.isHidden = false
                     return
                 }
+                
                 guard let data = resp.data else { return }
                 do {
-                    let signupResponse = try JSONDecoder().decode(SignUpResponse.self, from: data)
-                    if let token = signupResponse.data?.token {
-                        signupResponse.data?.logIn()
+                    let signUpResp = try JSONDecoder().decode(SignUpResponse.self, from: data)
+                    guard let _ = signUpResp.data?.token else {
+                        fatalError("No token received from server!")
                     }
+                    signUpResp.data?.logIn()
                 } catch (let err) {
                     fatalError("Error in decoding Signup response : \(err.localizedDescription)")
                 }
