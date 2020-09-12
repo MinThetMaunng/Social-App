@@ -52,7 +52,7 @@ class LoginController: LBTAFormController {
                     guard let _ = loginResp.data?.token else {
                         fatalError("No token received from server!")
                     }
-                    loginResp.data?.logIn()
+                    loginResp.data?.login()
                 } catch(let err) {
                     fatalError("Error in log in response decoding : \(err.localizedDescription)")
                 }

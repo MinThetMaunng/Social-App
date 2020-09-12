@@ -44,7 +44,6 @@ class HomeController: UITableViewController {
                 do {
                     let fetchedPostsResponse = try JSONDecoder().decode(FetchedPostsResponse.self, from: data)
                     self.posts = fetchedPostsResponse.data ?? self.posts
-                    print(self.posts)
                     self.tableView.reloadData()
                 } catch (let err) {
                     fatalError("Error in decoding fetch posts : \(err.localizedDescription)")

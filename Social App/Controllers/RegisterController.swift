@@ -67,7 +67,7 @@ class RegisterController: LBTAFormController {
                     guard let _ = signUpResp.data?.token else {
                         fatalError("No token received from server!")
                     }
-                    signUpResp.data?.logIn()
+                    signUpResp.data?.login()
                 } catch (let err) {
                     fatalError("Error in decoding Signup response : \(err.localizedDescription)")
                 }
