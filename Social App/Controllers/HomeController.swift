@@ -42,6 +42,7 @@ class HomeController: UITableViewController {
                 
                 guard let data = resp.data else { return }
                 do {
+                    
                     let fetchedPostsResponse = try JSONDecoder().decode(FetchedPostsResponse.self, from: data)
                     self.posts = fetchedPostsResponse.data ?? self.posts
                     self.tableView.reloadData()

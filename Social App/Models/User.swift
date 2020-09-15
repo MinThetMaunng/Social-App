@@ -14,28 +14,13 @@ struct User: Codable {
     var firstName: String?
     var middleName: String?
     var lastName: String?
+    var fullName: String?
     var email: String?
     var password: String?
     var createdAt: String?
     var updatedAt: String?
     var token: String?
     var __v: Int?
-    
-    var fullName: String {
-        get {
-            var fullNameString = ""
-            if let firstName = self.firstName {
-                fullNameString += firstName
-            }
-            if self.middleName != nil && self.middleName != "" {
-                fullNameString += " \(self.middleName!)"
-            }
-            if self.lastName != nil && self.lastName != "" {
-                fullNameString += " \(self.lastName!)"
-            }
-            return fullNameString
-        }
-    }
     
     func login() {
         AuthService.shared.jwtToken = token
@@ -51,5 +36,4 @@ struct User: Codable {
         AuthService.shared.currentUserFullName = nil
     }
     
-   
 }

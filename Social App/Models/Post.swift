@@ -12,6 +12,8 @@ struct Post: Codable {
     var _id: String
     var text: String?
     var user: User
+    var imageName: String?
+    var imageUrl: String?
     var createdAt: String?
     var updatedAt: String?
     var __v: Int?

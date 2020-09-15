@@ -33,30 +33,24 @@ class LoginController: LBTAFormController {
         
         errorLabel.isHidden = true
         
-        let url = "\(baseUrl)/users/login/"
         let params = ["email": email, "password": password]
         
-        AF.request(url, method: .post, parameters: params, encoding: URLEncoding())
-            .validate(statusCode: 200..<300)
-            .responseData { (resp) in
+        AuthService.shared.login(parameters: params) { (result) in
             hud.dismiss()
             
-                if let _ = resp.error {
-                    self.errorLabel.isHidden = false
-                    return
+            switch result {
+            case .success(let resp):
+                guard let _ = resp.data?.token else {
+                    fatalError("No token received from server!")
                 }
+                resp.data?.login()
                 
-                guard let data = resp.data else { return }
-                do {
-                    let loginResp = try JSONDecoder().decode(LoginResponse.self, from: data)
-                    guard let _ = loginResp.data?.token else {
-                        fatalError("No token received from server!")
-                    }
-                    loginResp.data?.login()
-                } catch(let err) {
-                    fatalError("Error in log in response decoding : \(err.localizedDescription)")
-                }
-                self.dismiss(animated: true)
+            case .failure(let err):
+                self.errorLabel.isHidden = false
+                fatalError("Error in log in response decoding : \(err.localizedDescription)")
+            }
+
+            self.dismiss(animated: true)
         }
     }
     

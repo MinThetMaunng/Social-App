@@ -41,7 +41,6 @@ class RegisterController: LBTAFormController {
             password.count > 0
             else { return }
         
-        let url = "\(baseUrl)/users/signup/"
         let params = [
             "firstName": firstName,
             "middleName": middleName,
@@ -50,29 +49,21 @@ class RegisterController: LBTAFormController {
             "password": password
         ]
         
-        AF.request(url, method: .post, parameters: params)
-            .validate(statusCode: 200..<300)
-            .responseData { (resp) in
-                hud.dismiss()
-
-                if let err = resp.error {
-                    print("Error in sign up : \(err.localizedDescription)")
-                    self.errorLabel.isHidden = false
-                    return
-                }
+        AuthService.shared.signup(parameters: params) { (result) in
+            
+            hud.dismiss()
+            
+            switch result {
+            case .failure(let err):
+                print("Error in sign up : \(err.localizedDescription)")
+                self.errorLabel.isHidden = false
                 
-                guard let data = resp.data else { return }
-                do {
-                    let signUpResp = try JSONDecoder().decode(SignUpResponse.self, from: data)
-                    guard let _ = signUpResp.data?.token else {
-                        fatalError("No token received from server!")
-                    }
-                    signUpResp.data?.login()
-                } catch (let err) {
-                    fatalError("Error in decoding Signup response : \(err.localizedDescription)")
-                }
-
+            case .success(let resp):
+                resp.data?.login()
+                self.dismiss(animated: true)
+            }
         }
+        
     }
     
     @objc private func goToLogin() {

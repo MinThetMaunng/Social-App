@@ -20,6 +20,7 @@
 		D93E3ABB2505320B00918DB7 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93E3ABA2505320B00918DB7 /* HomeController.swift */; };
 		D956AF812509421400B1EE6C /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = D956AF802509421400B1EE6C /* Post.swift */; };
 		D9670C7C250A14C1005845B2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9670C7B250A14C1005845B2 /* Constants.swift */; };
+		D981705B2510AD0E00B91D2F /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D981705A2510AD0E00B91D2F /* PostService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		D93E3ABA2505320B00918DB7 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		D956AF802509421400B1EE6C /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		D9670C7B250A14C1005845B2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D981705A2510AD0E00B91D2F /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				D9257FD525092BC200E6E411 /* AuthService.swift */,
+				D981705A2510AD0E00B91D2F /* PostService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				D92258C52508A51A00EA586E /* LoginController.swift in Sources */,
 				D9257FD625092BC200E6E411 /* AuthService.swift in Sources */,
 				D956AF812509421400B1EE6C /* Post.swift in Sources */,
+				D981705B2510AD0E00B91D2F /* PostService.swift in Sources */,
 				D93E3AA42505289000918DB7 /* AppDelegate.swift in Sources */,
 				D9257FD9250935F300E6E411 /* User.swift in Sources */,
 				D93E3AA62505289000918DB7 /* SceneDelegate.swift in Sources */,

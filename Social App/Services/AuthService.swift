@@ -8,6 +8,7 @@
 
 import Foundation
 import KeychainSwift
+import Alamofire
 
 enum Keys: String {
     case token = "jsonwebtoken"
@@ -57,6 +58,42 @@ class AuthService : NSObject {
         }
         set {
             defaults.set(newValue, forKey: Keys.isLoggedIn.rawValue)
+        }
+    }
+    
+    func signup(parameters: Parameters, completion: @escaping  (Result<SignUpResponse, Error>) -> ()) {
+        let url = "\(baseUrl)/users/signup/"
+        
+        AF.request(url, method: .post, parameters: parameters)
+            .validate(statusCode: 200..<300)
+            .responseData { (resp) in
+                
+            guard let data = resp.data else { return }
+            do {
+                let signUpResp = try JSONDecoder().decode(SignUpResponse.self, from: data)
+                guard let _ = signUpResp.data?.token else {
+                    fatalError("No token received from server!")
+                }
+                completion(.success(signUpResp))
+            } catch (let err) {
+                completion(.failure(err))
+            }
+        }
+    }
+    
+    func login(parameters: Parameters, completion: @escaping (Result<LoginResponse, Error>) -> ()) {
+        let url = "\(baseUrl)/users/login/"
+        
+        AF.request(url, method: .post, parameters: parameters, encoding: URLEncoding())
+            .validate(statusCode: 200..<300)
+            .responseData { (resp) in
+                guard let data = resp.data else { return }
+                do {
+                    let loginResp = try JSONDecoder().decode(LoginResponse.self, from: data)
+                    completion(.success(loginResp))
+                } catch (let err) {
+                    completion(.failure(err))
+                }
         }
     }
     
