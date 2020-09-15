@@ -29,27 +29,16 @@ class HomeController: UITableViewController {
     
     @objc private func fetchPosts() {
         
-        guard let token = AuthService.shared.jwtToken else { return }
-        guard let url = URL(string: "\(baseUrl)/posts/") else { return }
-        let headers = HTTPHeaders(arrayLiteral: HTTPHeader(name: "Content-Type", value: "application/json"), HTTPHeader(name: "Authorization", value: token))
-        
-        AF.request(url, headers: headers)
-            .validate(statusCode: 200..<300)
-            .responseData { (resp) in
-                if let err = resp.error {
-                    print("Failed to fetch posts : \(err)")
-                }
-                
-                guard let data = resp.data else { return }
-                do {
-                    
-                    let fetchedPostsResponse = try JSONDecoder().decode(FetchedPostsResponse.self, from: data)
-                    self.posts = fetchedPostsResponse.data ?? self.posts
-                    self.tableView.reloadData()
-                } catch (let err) {
-                    fatalError("Error in decoding fetch posts : \(err.localizedDescription)")
-                }
+        PostService.shared.fetchPosts { (result) in
+            switch result {
+            case .success(let resp):
+                self.posts = resp.data ?? self.posts
+                self.tableView.reloadData()
+            case .failure(let err):
+                fatalError("Error in decoding fetch posts : \(err.localizedDescription)")
+            }
         }
+
     }
     
     
