@@ -54,21 +54,16 @@ class HomeController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
+        let cell = PostCell(style: .subtitle, reuseIdentifier: nil)
         let post = posts[indexPath.row]
         
-        cell.textLabel?.text = post.user.fullName
-        cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        cell.detailTextLabel?.text = post.text
-        cell.detailTextLabel?.numberOfLines = 0
+        cell.fullNameLabel.text = post.user.fullName
+        cell.postTextLabel.text = post.text
+    
         if let imageUrl = post.imageUrl {
-            cell.imageView?.sd_setImage(with: URL(string: imageUrl))
+            cell.postImageView.sd_setImage(with: URL(string: imageUrl))
         }
         return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        150
     }
     
 }
@@ -81,6 +76,11 @@ extension HomeController:  UIImagePickerControllerDelegate & UINavigationControl
         guard let image = info[.originalImage] as? UIImage else { return }
         
         dismiss(animated: true) {
+            let createPostController = CreatePostController(selectedImage: image)
+            createPostController.homeController = self
+            self.present(createPostController, animated: true)
+            
+            /*
             let url = "\(baseUrl)/posts/"
             let text = "testing from iPhone with AlamoFire again"
             guard let imageData = image.jpegData(compressionQuality: 1.0) else { return }
@@ -101,8 +101,7 @@ extension HomeController:  UIImagePickerControllerDelegate & UINavigationControl
                         self.fetchPosts()
                     }
             }
-           
-            
+            */
             
         }
     }
