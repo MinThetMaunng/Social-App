@@ -7,8 +7,10 @@
 //
 
 import LBTATools
+import Alamofire
+import JGProgressHUD
 
-class CreatePostController: UIViewController {
+class CreatePostController: UIViewController, UITextViewDelegate {
     
     let selectedImage: UIImage
     weak var homeController: HomeController?
@@ -28,15 +30,40 @@ class CreatePostController: UIViewController {
     
     @objc private func handlePost() {
         
+        let hud = JGProgressHUD(style: .dark)
+        hud.indicatorView = JGProgressHUDRingIndicatorView()
+        hud.textLabel.text = "Uploading"
+        hud.show(in: view)
+        
+        guard let text = postBodyTextView.text else { return }
+        guard let imageData = selectedImage.jpegData(compressionQuality: 1.0) else { return }
+        
+        PostService.shared.createPost(text: text, imageData: imageData, completion: {
+            hud.dismiss()
+            self.dismiss(animated: true) {
+                self.homeController?.fetchPosts()
+            }
+        }) { (progress) in
+            DispatchQueue.main.async {
+                hud.progress = progress
+                hud.textLabel.text = "Uploading\n\(Int(progress * 100))%"
+            }
+        }
+        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func textViewDidChange(_ textView: UITextView) {
+        placeholderLabel.alpha = !textView.text.isEmpty ? 0 : 1
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        postBodyTextView.delegate = self
         postBodyTextView.backgroundColor = .clear
         postButton.layer.cornerRadius = 5
         

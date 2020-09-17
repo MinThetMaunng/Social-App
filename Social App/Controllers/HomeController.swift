@@ -28,8 +28,7 @@ class HomeController: UITableViewController {
         present(navController, animated: true)
     }
     
-    @objc private func fetchPosts() {
-        
+    @objc func fetchPosts() {
         PostService.shared.fetchPosts { (result) in
             switch result {
             case .success(let resp):
@@ -80,28 +79,7 @@ extension HomeController:  UIImagePickerControllerDelegate & UINavigationControl
             createPostController.homeController = self
             self.present(createPostController, animated: true)
             
-            /*
-            let url = "\(baseUrl)/posts/"
-            let text = "testing from iPhone with AlamoFire again"
-            guard let imageData = image.jpegData(compressionQuality: 1.0) else { return }
-
-            guard let token = AuthService.shared.jwtToken else { return }
-            let headers = HTTPHeaders(arrayLiteral: HTTPHeader(name: "Content-Type", value: "application/x-www-form-urlencoded"), HTTPHeader(name: "Authorization", value: token))
             
-            AF.upload(multipartFormData: { (formData) in
-                formData.append(Data(text.utf8), withName: "text")
-                formData.append(imageData, withName: "image", fileName: "minthetmaung", mimeType: "image/jpeg")
-            }, to: url, method: .post, headers: headers)
-                .responseJSON(completionHandler: { (resp) in
-                })
-                .uploadProgress { (progress) in
-                    let percentage = Int(progress.fractionCompleted * 100)
-                    print("Progress : \(percentage)")
-                    if percentage >= 100 {
-                        self.fetchPosts()
-                    }
-            }
-            */
             
         }
     }

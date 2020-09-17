@@ -12,6 +12,28 @@ import Alamofire
 class PostService {
     public static let shared = PostService()
     
+    func createPost(text: String, imageData: Data, completion: @escaping () -> (), uploading: @escaping (_ progress: Float) -> () ) {
+        
+        let url = "\(baseUrl)/posts/"
+        
+        guard let token = AuthService.shared.jwtToken else { return }
+        let headers = HTTPHeaders(arrayLiteral: HTTPHeader(name: "Content-Type", value: "application/x-www-form-urlencoded"), HTTPHeader(name: "Authorization", value: token))
+        
+        AF.upload(multipartFormData: { (formData) in
+            formData.append(Data(text.utf8), withName: "text")
+            formData.append(imageData, withName: "image", fileName: "image", mimeType: "image/jpeg")
+        }, to: url, method: .post, headers: headers)
+            .responseJSON(completionHandler: { (resp) in
+                if resp.error != nil {
+                    fatalError("Error in creating post reponse : \(resp.error?.localizedDescription)")
+                }
+                completion()
+            })
+            .uploadProgress { (progress) in
+                uploading(Float(progress.fractionCompleted))
+        }
+    }
+    
     func fetchPosts(completion: @escaping (Result<FetchedPostsResponse, Error>) -> ()) {
         guard let token = AuthService.shared.jwtToken else { return }
         guard let url = URL(string: "\(baseUrl)/posts/") else { return }
