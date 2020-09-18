@@ -22,18 +22,4 @@ struct User: Codable {
     var token: String?
     var __v: Int?
     
-    func login() {
-        AuthService.shared.jwtToken = token
-        AuthService.shared.isLoggedIn = true
-        AuthService.shared.currentUserId = _id
-        AuthService.shared.currentUserFullName = fullName
-    }
-    
-    func logout() {
-        AuthService.shared.jwtToken = nil
-        AuthService.shared.isLoggedIn = false
-        AuthService.shared.currentUserId = nil
-        AuthService.shared.currentUserFullName = nil
-    }
-    
 }

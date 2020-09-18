@@ -35,7 +35,7 @@ class LoginController: LBTAFormController {
         
         let params = ["email": email, "password": password]
         
-        AuthService.shared.login(parameters: params) { (result) in
+        AuthService.shared.sendLoginRequest(parameters: params) { (result) in
             hud.dismiss()
             
             switch result {
@@ -43,7 +43,11 @@ class LoginController: LBTAFormController {
                 guard let _ = resp.data?.token else {
                     fatalError("No token received from server!")
                 }
-                resp.data?.login()
+                guard let user = resp.data,
+                      let token = user.token,
+                      let fullName = user.fullName
+                else { return }
+                AuthService.shared.login(userId: user._id, token: token, fullName: fullName)
                 
             case .failure(let err):
                 self.errorLabel.isHidden = false
@@ -59,19 +63,7 @@ class LoginController: LBTAFormController {
         navigationController?.pushViewController(controller, animated: true)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        view.backgroundColor = .init(white: 0.95, alpha: 1)
-        
-        emailTextField.autocapitalizationType = .none
-        emailTextField.backgroundColor = .white
-        passwordTextField.backgroundColor = .white
-        passwordTextField.isSecureTextEntry = true
-        loginButton.layer.cornerRadius = 25
-        navigationController?.navigationBar.isHidden = true
-        errorLabel.isHidden = true
-        
+    private func setupConstraints() {
         let formView = UIView()
         formView.stack(
             formView.stack(formView.hstack(logoImageView.withSize(.init(width: 80, height: 80)), logoLabel.withWidth(160), spacing: 16, alignment: .center).padLeft(12).padRight(12), alignment: .center),
@@ -86,6 +78,22 @@ class LoginController: LBTAFormController {
         
         formContainerStackView.padBottom(-24)
         formContainerStackView.addArrangedSubview(formView)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.backgroundColor = .init(white: 0.95, alpha: 1)
+        
+        emailTextField.autocapitalizationType = .none
+        emailTextField.backgroundColor = .white
+        passwordTextField.backgroundColor = .white
+        passwordTextField.isSecureTextEntry = true
+        loginButton.layer.cornerRadius = 25
+        navigationController?.navigationBar.isHidden = true
+        errorLabel.isHidden = true
+        
+        setupConstraints()
     }
     
 

@@ -61,7 +61,7 @@ class AuthService : NSObject {
         }
     }
     
-    func signup(parameters: Parameters, completion: @escaping  (Result<SignUpResponse, Error>) -> ()) {
+    func sendSignUpRequest(parameters: Parameters, completion: @escaping  (Result<SignUpResponse, Error>) -> ()) {
         let url = "\(baseUrl)/users/signup/"
         
         AF.request(url, method: .post, parameters: parameters)
@@ -81,7 +81,7 @@ class AuthService : NSObject {
         }
     }
     
-    func login(parameters: Parameters, completion: @escaping (Result<LoginResponse, Error>) -> ()) {
+    func sendLoginRequest(parameters: Parameters, completion: @escaping (Result<LoginResponse, Error>) -> ()) {
         let url = "\(baseUrl)/users/login/"
         
         AF.request(url, method: .post, parameters: parameters, encoding: URLEncoding())
@@ -95,6 +95,21 @@ class AuthService : NSObject {
                     completion(.failure(err))
                 }
         }
+    }
+    
+    
+    func login(userId _id: String, token: String, fullName: String) {
+        AuthService.shared.jwtToken = token
+        AuthService.shared.isLoggedIn = true
+        AuthService.shared.currentUserId = _id
+        AuthService.shared.currentUserFullName = fullName
+    }
+    
+    func logout() {
+        AuthService.shared.jwtToken = nil
+        AuthService.shared.isLoggedIn = false
+        AuthService.shared.currentUserId = nil
+        AuthService.shared.currentUserFullName = nil
     }
     
 }

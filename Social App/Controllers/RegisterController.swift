@@ -49,7 +49,7 @@ class RegisterController: LBTAFormController {
             "password": password
         ]
         
-        AuthService.shared.signup(parameters: params) { (result) in
+        AuthService.shared.sendSignUpRequest(parameters: params) { (result) in
             
             hud.dismiss()
             
@@ -59,7 +59,11 @@ class RegisterController: LBTAFormController {
                 self.errorLabel.isHidden = false
                 
             case .success(let resp):
-                resp.data?.login()
+                guard let user = resp.data,
+                      let token = user.token,
+                      let fullName = user.fullName
+                else { return }
+                AuthService.shared.login(userId: user._id, token: token, fullName: fullName)
                 self.dismiss(animated: true)
             }
         }
@@ -75,20 +79,7 @@ class RegisterController: LBTAFormController {
         return true
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        errorLabel.isHidden = true
-        emailTextField.autocapitalizationType = .none
-        [firstNameTextField, middleNameTextField, lastNameTextField, emailTextField, passwordTextField].forEach{
-            $0.autocorrectionType = .no
-            $0.backgroundColor = .white
-            
-        }
-        signupButton.layer.cornerRadius = 25
-        
-        view.backgroundColor = .init(white: 0.92, alpha: 1)
-        
+    private func setupConstraints() {
         let formView = UIView()
         formView.stack(
             formView.stack(formView.hstack(logoImageView.withSize(.init(width: 80, height: 80)), logoLabel.withWidth(160), spacing: 16, alignment: .center).padLeft(12).padRight(12), alignment: .center),
@@ -105,5 +96,22 @@ class RegisterController: LBTAFormController {
             spacing: 16).withMargins(.init(top: 48, left: 32, bottom: 0, right: 32))
         
         formContainerStackView.addArrangedSubview(formView)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        errorLabel.isHidden = true
+        emailTextField.autocapitalizationType = .none
+        [firstNameTextField, middleNameTextField, lastNameTextField, emailTextField, passwordTextField].forEach{
+            $0.autocorrectionType = .no
+            $0.backgroundColor = .white
+            
+        }
+        signupButton.layer.cornerRadius = 25
+        
+        view.backgroundColor = .init(white: 0.92, alpha: 1)
+        
+        setupConstraints()
     }
 }
