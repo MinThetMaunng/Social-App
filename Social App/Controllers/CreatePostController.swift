@@ -7,7 +7,6 @@
 //
 
 import LBTATools
-import Alamofire
 import JGProgressHUD
 
 class CreatePostController: UIViewController, UITextViewDelegate {

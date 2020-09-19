@@ -8,11 +8,15 @@
 
 import UIKit
 import LBTATools
-import Alamofire
+import JGProgressHUD
 import SDWebImage
 
 class HomeController: UITableViewController {
-    
+    lazy var deleteHud: JGProgressHUD = {
+        let h = JGProgressHUD(style: .dark)
+        h.textLabel.text = "Deleting"
+        return h
+    }()
     var posts = [Post]()
 
     fileprivate func setupNavigationBarItems() {
@@ -23,7 +27,7 @@ class HomeController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
+//        tableView.allowsSelection = false
         setupNavigationBarItems()
         fetchPosts()
     }
@@ -64,8 +68,12 @@ class HomeController: UITableViewController {
         cell.fullNameLabel.text = post.user.fullName
         cell.postTextLabel.text = post.text
     
+        cell.delegate = self
         if let imageUrl = post.imageUrl {
             cell.postImageView.sd_setImage(with: URL(string: imageUrl))
+        }
+        if post.user._id != AuthService.shared.currentUserId {
+            cell.optionsButton.isHidden = true
         }
         return cell
     }
@@ -84,6 +92,10 @@ extension HomeController:  UIImagePickerControllerDelegate & UINavigationControl
             createPostController.homeController = self
             self.present(createPostController, animated: true)
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

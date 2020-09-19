@@ -24,8 +24,8 @@ class PostService {
             formData.append(imageData, withName: "image", fileName: "image", mimeType: "image/jpeg")
         }, to: url, method: .post, headers: headers)
             .responseJSON(completionHandler: { (resp) in
-                if resp.error != nil {
-                    fatalError("Error in creating post reponse : \(resp.error?.localizedDescription)")
+                if let err = resp.error {
+                    fatalError("Error in creating post reponse : \(err.localizedDescription)")
                 }
                 completion()
             })
@@ -54,5 +54,31 @@ class PostService {
                     completion(.failure(err))
                 }
         }
+    }
+    
+    func deletePost(postId: String, completion: @escaping (Result<DeletePostResponse, Error>) -> ()) {
+        guard let token = AuthService.shared.jwtToken
+        else { return }
+        
+        let url = "\(baseUrl)/posts/\(postId)"
+        let headers = HTTPHeaders([HTTPHeader(name: "Authorization", value: token)])
+        AF.request(url, method: .delete, headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseJSON { (resp) in
+                
+                if let err = resp.error {
+                    print("Error in deleting post : \(err.localizedDescription)")
+                    completion(.failure(err))
+                }
+                
+                guard let data = resp.data else { return }
+                do {
+                    let deletePostResponse = try JSONDecoder().decode(DeletePostResponse.self, from: data)
+                    completion(.success(deletePostResponse))
+                } catch(let err) {
+                    print("Error in decoding response from deleting post : \(err.localizedDescription)")
+                    completion(.failure(err))
+                }
+            }
     }
 }

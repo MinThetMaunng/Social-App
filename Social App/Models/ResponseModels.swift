@@ -29,3 +29,8 @@ struct FetchedPostsResponse: Codable {
     var total: Int
 }
 
+struct DeletePostResponse: Codable {
+    var data: Post?
+    var status: Int
+    var message: String?
+}
