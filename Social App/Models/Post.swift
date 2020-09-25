@@ -16,6 +16,7 @@ struct Post: Codable {
     var imageUrl: String?
     var createdAt: String?
     var updatedAt: String?
+    var timeAgo: String?
     var __v: Int?
 }
 

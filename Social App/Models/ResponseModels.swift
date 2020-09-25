@@ -34,3 +34,9 @@ struct DeletePostResponse: Codable {
     var status: Int
     var message: String?
 }
+
+struct SearchUsersResponse: Codable {
+    var data: [User]?
+    var status: Int
+    var message: String?
+}

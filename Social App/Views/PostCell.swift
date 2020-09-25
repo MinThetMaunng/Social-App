@@ -67,6 +67,7 @@ class PostCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        backgroundColor = .white
         contentView.isUserInteractionEnabled = false
         postImageView.heightAnchor.constraint(equalTo: postImageView.widthAnchor).isActive = true
         stack(hstack(fullNameLabel,

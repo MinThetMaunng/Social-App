@@ -20,6 +20,7 @@ struct User: Codable {
     var createdAt: String?
     var updatedAt: String?
     var token: String?
+    var isFollowing: Bool?
     var __v: Int?
     
 }
