@@ -25,6 +25,8 @@ class UserSearchCell: LBTAListCell<User> {
     
     override func setupViews() {
         super.setupViews()
+        backgroundColor = .white
+        
         followButton.layer.cornerRadius = 17
         followButton.layer.borderWidth = 1
         
