@@ -59,7 +59,7 @@ class PostCell: UITableViewCell {
     let postTextLabel = UILabel(text: "This is post text which is very long that goes to multiple lines.", font: .systemFont(ofSize: 15), numberOfLines: 0)
     lazy var optionsButton = UIButton(image: #imageLiteral(resourceName: "post_options"), tintColor: .black, target: self, action: #selector(handleOptions))
     
-    var delegate: PostCellOptionsDelegate?
+    weak var delegate: PostCellOptionsDelegate?
     
     @objc private func handleOptions() {
         delegate?.handlePostOptions(cell: self)

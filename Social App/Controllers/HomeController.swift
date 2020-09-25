@@ -21,7 +21,7 @@ class HomeController: UITableViewController {
 
     fileprivate func setupNavigationBarItems() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Login", style: .plain, target: self, action: #selector(handleLogin))
-        navigationItem.rightBarButtonItems = [.init(title: "Fetch posts", style: .plain, target: self, action: #selector(fetchPosts)), .init(title: "Create post", style: .plain, target: self, action: #selector(createPost)) ]
+        navigationItem.rightBarButtonItems = [.init(title: "Search", style: .plain, target: self, action: #selector(fetchPosts)), .init(title: "Create post", style: .plain, target: self, action: #selector(searchUser)) ]
     }
     
     override func viewDidLoad() {
@@ -35,6 +35,10 @@ class HomeController: UITableViewController {
     @objc private func handleLogin() {
         let navController = UINavigationController(rootViewController: LoginController())
         present(navController, animated: true)
+    }
+    
+    @objc private func searchUser() {
+        
     }
     
     @objc func fetchPosts() {
