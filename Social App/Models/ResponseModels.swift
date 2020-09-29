@@ -26,7 +26,7 @@ struct FetchedPostsResponse: Codable {
     var data: [Post]?
     var status: Int
     var message: String?
-    var total: Int
+    var total: Int?
 }
 
 struct DeletePostResponse: Codable {

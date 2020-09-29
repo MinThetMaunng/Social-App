@@ -34,6 +34,7 @@ class HomeController: UITableViewController {
     
     @objc private func handleLogin() {
         let navController = UINavigationController(rootViewController: LoginController())
+        navController.modalPresentationStyle = .fullScreen
         present(navController, animated: true)
     }
     
@@ -46,6 +47,15 @@ class HomeController: UITableViewController {
         PostService.shared.fetchPosts { (result) in
             switch result {
             case .success(let resp):
+                if resp.status == 403 {
+                    let alert = UIAlertController(title: "Login to continue", message: "", preferredStyle: .alert)
+                    let action = UIAlertAction(title: "Okay", style: .default) { (_) in
+                        self.handleLogin()
+                    }
+                    alert.addAction(action)
+                    self.present(alert, animated: true)
+                    return 
+                }
                 self.posts = resp.data ?? self.posts
                 self.tableView.reloadData()
             case .failure(let err):

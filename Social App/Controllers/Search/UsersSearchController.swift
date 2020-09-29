@@ -16,13 +16,14 @@ class UsersSearchController: LBTAListController<UserSearchCell, User> {
         collectionView.backgroundColor = .white
         navigationItem.title = "Search"
         
+        collectionView.register(UserSearchCell.self, forCellWithReuseIdentifier: "cellId")
         UserService.shared.searchUser(keyword: "M") { (result) in
             switch result {
             case .success(let resp):
                 if let users = resp.data {
+                    
                     self.items = users
-                    print(self.items)
-//                    self.collectionView.reloadData()
+                    self.collectionView.reloadData()
                 }
             case .failure(let err):
                 print("Error in searching users: \(err.localizedDescription)")

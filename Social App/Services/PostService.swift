@@ -40,12 +40,12 @@ class PostService {
         let headers = HTTPHeaders(arrayLiteral: HTTPHeader(name: "Content-Type", value: "application/json"), HTTPHeader(name: "Authorization", value: token))
         
         AF.request(url, headers: headers)
-            .validate(statusCode: 200..<300)
+            .validate(statusCode: 200..<500)
             .responseData { (resp) in
                 if let err = resp.error {
                     completion(.failure(err))
                 }
-                
+
                 guard let data = resp.data else { return }
                 do {
                     let fetchedPostsResponse = try JSONDecoder().decode(FetchedPostsResponse.self, from: data)
