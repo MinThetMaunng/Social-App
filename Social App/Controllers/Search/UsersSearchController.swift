@@ -9,19 +9,32 @@
 import LBTATools
 
 class UsersSearchController: LBTAListController<UserSearchCell, User> {
-//    var users = [User]()
+    
+    let searchController: UISearchController = {
+        let sc = UISearchController()
+        sc.automaticallyShowsCancelButton = true
+        sc.hidesNavigationBarDuringPresentation = false
+        return sc
+    }()
     
     override func viewDidLoad() {
         view.backgroundColor = .white
         collectionView.backgroundColor = .white
-        navigationItem.title = "Search"
-        
+        searchController.searchBar.delegate = self
+        navigationItem.titleView = searchController.searchBar
         collectionView.register(UserSearchCell.self, forCellWithReuseIdentifier: "cellId")
-        UserService.shared.searchUser(keyword: "M") { (result) in
+    }
+}
+
+extension UsersSearchController: UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let keyword = searchBar.text else { return }
+        
+        UserService.shared.searchUser(keyword: keyword) { (result) in
             switch result {
             case .success(let resp):
                 if let users = resp.data {
-                    
                     self.items = users
                     self.collectionView.reloadData()
                 }
@@ -30,9 +43,6 @@ class UsersSearchController: LBTAListController<UserSearchCell, User> {
             }
         }
     }
-}
-
-extension UsersSearchController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize(width: view.frame.width, height: 80)

@@ -40,6 +40,7 @@ class HomeController: UITableViewController {
     
     @objc private func searchUser() {
         let navController = UINavigationController(rootViewController: UsersSearchController())
+//        navController.modalPresentationStyle = .fullScreen
         present(navController, animated: true)
     }
     
