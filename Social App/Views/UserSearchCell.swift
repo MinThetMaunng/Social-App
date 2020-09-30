@@ -20,6 +20,15 @@ class UserSearchCell: LBTAListCell<User> {
     override var item: User! {
         didSet {
             nameLabel.text = item.fullName
+            if item.isFollowing == true {
+                followButton.backgroundColor = .black
+                followButton.setTitle("Unfollow", for: .normal)
+                followButton.setTitleColor(.white, for: .normal)
+            } else {
+                followButton.backgroundColor = .white
+                followButton.setTitle("Follow", for: .normal)
+                followButton.setTitleColor(.black, for: .normal)
+            }
         }
     }
     
