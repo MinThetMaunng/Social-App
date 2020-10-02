@@ -40,3 +40,9 @@ struct SearchUsersResponse: Codable {
     var status: Int
     var message: String?
 }
+
+struct FollowUnfollowResponse: Codable {
+    var data: Follow?
+    var status: Int
+    var message: String?
+}

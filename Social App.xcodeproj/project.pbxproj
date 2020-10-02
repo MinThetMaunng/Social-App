@@ -16,6 +16,7 @@
 		D9257FD9250935F300E6E411 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9257FD8250935F300E6E411 /* User.swift */; };
 		D9257FDB250936C100E6E411 /* ResponseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9257FDA250936C100E6E411 /* ResponseModels.swift */; };
 		D9363551250A764D004019A9 /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9363550250A764D004019A9 /* RegisterController.swift */; };
+		D93967C625271BC30097942A /* Follow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93967C525271BC30097942A /* Follow.swift */; };
 		D93E3AA42505289000918DB7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93E3AA32505289000918DB7 /* AppDelegate.swift */; };
 		D93E3AA62505289000918DB7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93E3AA52505289000918DB7 /* SceneDelegate.swift */; };
 		D93E3AAD2505289200918DB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D93E3AAC2505289200918DB7 /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 		D9257FD8250935F300E6E411 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		D9257FDA250936C100E6E411 /* ResponseModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseModels.swift; sourceTree = "<group>"; };
 		D9363550250A764D004019A9 /* RegisterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
+		D93967C525271BC30097942A /* Follow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Follow.swift; sourceTree = "<group>"; };
 		D93E3AA02505289000918DB7 /* Social App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Social App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D93E3AA32505289000918DB7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D93E3AA52505289000918DB7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				D9257FD8250935F300E6E411 /* User.swift */,
 				D956AF802509421400B1EE6C /* Post.swift */,
 				D9257FDA250936C100E6E411 /* ResponseModels.swift */,
+				D93967C525271BC30097942A /* Follow.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 				D90CE00B251E541900113FF4 /* UserSearchCell.swift in Sources */,
 				D9257FD625092BC200E6E411 /* AuthService.swift in Sources */,
 				D956AF812509421400B1EE6C /* Post.swift in Sources */,
+				D93967C625271BC30097942A /* Follow.swift in Sources */,
 				D981705B2510AD0E00B91D2F /* PostService.swift in Sources */,
 				D93E3AA42505289000918DB7 /* AppDelegate.swift in Sources */,
 				D9257FD9250935F300E6E411 /* User.swift in Sources */,

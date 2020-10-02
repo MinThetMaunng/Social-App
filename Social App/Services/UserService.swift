@@ -34,4 +34,27 @@ class UserService {
                 }
         }
     }
+    
+    func followUser(userId: String, completion: @escaping (Result<FollowUnfollowResponse, Error>) -> ()) {
+        
+        guard let token = AuthService.shared.jwtToken else { return }
+        guard let url = URL(string: "\(baseUrl)/follows/\(userId)") else { return }
+        let headers = HTTPHeaders(arrayLiteral: HTTPHeader(name: "Content-Type", value: "application/json"), HTTPHeader(name: "Authorization", value: token))
+        
+        AF.request(url, method: .post, headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseData { (resp) in
+                if let err = resp.error {
+                    completion(.failure(err))
+                }
+                
+                guard let data = resp.data else { return }
+                do {
+                    let followUnfollowResponse = try JSONDecoder().decode(FollowUnfollowResponse.self, from: data)
+                    completion(.success(followUnfollowResponse))
+                } catch (let err) {
+                    completion(.failure(err))
+                }
+            }
+    }
 }
