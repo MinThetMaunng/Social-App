@@ -48,6 +48,9 @@ class UserSearchCell: LBTAListCell<User> {
                 followButton.setTitle("Follow", for: .normal)
                 followButton.setTitleColor(.black, for: .normal)
             }
+                
+            followButton.isHidden = item._id == AuthService.shared.currentUserId
+            
         }
     }
     
