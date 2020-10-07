@@ -24,6 +24,7 @@
 		D93E3ABB2505320B00918DB7 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93E3ABA2505320B00918DB7 /* HomeController.swift */; };
 		D956AF812509421400B1EE6C /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = D956AF802509421400B1EE6C /* Post.swift */; };
 		D9670C7C250A14C1005845B2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9670C7B250A14C1005845B2 /* Constants.swift */; };
+		D9684F5B252DB1C200B98D42 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9684F5A252DB1C100B98D42 /* ProfileController.swift */; };
 		D96A8E1125125FAD00B27120 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96A8E1025125FAD00B27120 /* PostCell.swift */; };
 		D96A8E132512652800B27120 /* CreatePostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96A8E122512652800B27120 /* CreatePostController.swift */; };
 		D981705B2510AD0E00B91D2F /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D981705A2510AD0E00B91D2F /* PostService.swift */; };
@@ -51,6 +52,7 @@
 		D93E3ABA2505320B00918DB7 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		D956AF802509421400B1EE6C /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		D9670C7B250A14C1005845B2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D9684F5A252DB1C100B98D42 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		D96A8E1025125FAD00B27120 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		D96A8E122512652800B27120 /* CreatePostController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostController.swift; sourceTree = "<group>"; };
 		D981705A2510AD0E00B91D2F /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				D92258C42508A51A00EA586E /* LoginController.swift */,
 				D9363550250A764D004019A9 /* RegisterController.swift */,
 				D96A8E122512652800B27120 /* CreatePostController.swift */,
+				D9684F5A252DB1C100B98D42 /* ProfileController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				D90CE004251E52F300113FF4 /* UsersSearchController.swift in Sources */,
 				D92258C52508A51A00EA586E /* LoginController.swift in Sources */,
 				D90CE00B251E541900113FF4 /* UserSearchCell.swift in Sources */,
+				D9684F5B252DB1C200B98D42 /* ProfileController.swift in Sources */,
 				D9257FD625092BC200E6E411 /* AuthService.swift in Sources */,
 				D956AF812509421400B1EE6C /* Post.swift in Sources */,
 				D93967C625271BC30097942A /* Follow.swift in Sources */,

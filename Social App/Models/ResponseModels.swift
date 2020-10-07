@@ -46,3 +46,9 @@ struct FollowUnfollowResponse: Codable {
     var status: Int
     var message: String?
 }
+
+struct FetchedUsersResponse: Codable {
+    var data: User?
+    var status: Int
+    var message: String?
+}

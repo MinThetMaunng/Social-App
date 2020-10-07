@@ -39,8 +39,7 @@ class UsersSearchController: LBTAListController<UserSearchCell, User> {
 extension UsersSearchController: UICollectionViewDelegateFlowLayout {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let controller = UIViewController()
-        controller.view.backgroundColor = .red
+        let controller = ProfileController()
         navigationController?.pushViewController(controller, animated: true)
     }
 }
