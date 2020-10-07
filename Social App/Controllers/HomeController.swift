@@ -19,16 +19,17 @@ class HomeController: UITableViewController {
     }()
     var posts = [Post]()
 
-    fileprivate func setupNavigationBarItems() {
+    private func setupNavigationBar() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Login", style: .plain, target: self, action: #selector(handleLogin))
         navigationItem.rightBarButtonItems = [.init(title: "Search", style: .plain, target: self, action: #selector(searchUser)), .init(title: "Create post", style: .plain, target: self, action: #selector(createPost)) ]
+        navigationController?.navigationBar.barTintColor = .white
+        navigationController?.navigationBar.setupShadow(opacity: 0.5, radius: 2, offset: CGSize(width: 0, height: 0.5), color: .lightGray)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad() 
         view.backgroundColor = .white
-//        tableView.allowsSelection = false
-        setupNavigationBarItems()
+        setupNavigationBar()
         fetchPosts()
     }
     
@@ -40,7 +41,6 @@ class HomeController: UITableViewController {
     
     @objc private func searchUser() {
         let navController = UINavigationController(rootViewController: UsersSearchController())
-//        navController.modalPresentationStyle = .fullScreen
         present(navController, animated: true)
     }
     

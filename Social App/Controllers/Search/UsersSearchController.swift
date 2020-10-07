@@ -21,12 +21,33 @@ class UsersSearchController: LBTAListController<UserSearchCell, User> {
         view.backgroundColor = .white
         collectionView.backgroundColor = .white
         searchController.searchBar.delegate = self
-        navigationItem.titleView = searchController.searchBar
+        setupNavigationBar()
         collectionView.register(UserSearchCell.self, forCellWithReuseIdentifier: "cellId")
+    }
+
+    fileprivate func setupNavigationBar() {
+        navigationItem.titleView = searchController.searchBar
+        navigationController?.navigationBar.barTintColor = .white
+        navigationController?.navigationBar.tintColor = .systemBlue
+        
+        navigationController?.navigationBar.setupShadow(opacity: 0.5, radius: 2, offset: CGSize(width: 0, height: 0.5), color: .lightGray)
     }
 }
 
-extension UsersSearchController: UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
+
+// MARK: - UICollectionViewDelegateFlowLayout
+extension UsersSearchController: UICollectionViewDelegateFlowLayout {
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let controller = UIViewController()
+        controller.view.backgroundColor = .red
+        navigationController?.pushViewController(controller, animated: true)
+    }
+}
+
+
+// MARK: - UISearchBarDelegate
+extension UsersSearchController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let keyword = searchBar.text else { return }
